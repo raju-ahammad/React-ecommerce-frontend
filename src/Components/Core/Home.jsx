@@ -19,7 +19,7 @@ const Home = () => {
 
     useEffect (()=>{
         loadProducts();
-    }, [loadProducts])
+    })
 
     return (
         <div>
