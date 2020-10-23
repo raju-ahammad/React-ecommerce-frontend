@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Base from './Base';
+import Card from './Card';
 import { getProducts } from './Helper/CoreApiCall';
 
 const Home = () => {
@@ -9,10 +11,9 @@ const Home = () => {
         getProducts()
             .then( (data)=> {
                 if (data.error) {
-                    setError(data.error);
-                    console.log(error);
+                    setError(data.error); 
                 }else {
-                    setProducts(data);
+                    setProducts(data);       
                 }
             })
     }
@@ -20,20 +21,21 @@ const Home = () => {
     useEffect (()=>{
         loadProducts();
     })
+    
 
     return (
-        <div>
+        <Base title="Home Page" description="welcome to To my store">
             <h1 className="text-center m-4 text-info">Hello from Home Component</h1>
             <div className="row">
                 {products.map((product, index)=>{
                     return (
-                        <div key={index}>
-                            <h3>{product.name}</h3>
+                        <div key={index} className="col-4 mb-4">
+                            <Card product={product} />
                         </div>
                     )
                 })}
             </div>
-        </div>
+        </Base>
     )
 }
 

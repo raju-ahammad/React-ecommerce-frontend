@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 const ImageHelper = ({product}) => {
     const imageUrl = product ? product.image : `https://www.pexels.com/photo/person-holding-black-slr-camera-2787216/`
     return (
