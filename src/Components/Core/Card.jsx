@@ -1,8 +1,10 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { addItemCart } from './Helper/CartHelper';
 import ImageHelper from './Helper/ImageHelper';
 
-const isAuthenTicated = false
+
+const isAuthenTicated = true
 
 const Card = ({product, addTocart=true, removeFromCart=false}) => {
     const cartTitle = product ? product.name : "Anonymous";
@@ -11,6 +13,7 @@ const Card = ({product, addTocart=true, removeFromCart=false}) => {
 
     const addToCart = () => {
         if(isAuthenTicated) {
+            addItemCart(product, ()=>{})
             console.log("Add to cart");
         }else {
             console.log("log in first");
