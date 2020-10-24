@@ -15,7 +15,7 @@ const Base = ({title="myTitle", description="my description", className="bg-dark
                     <h4>If you got any question contact our mail</h4>
                     <button className="btn-lg btn-warning btn">Contact Us</button>
                     <div className="container">
-                        <span className="text-muted">
+                        <span className="">
                             An amazing django react app
                         </span>
                     </div>

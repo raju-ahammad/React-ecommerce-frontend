@@ -64,9 +64,6 @@ const Card = ({product, addTocart=true, removeFromCart=true}) => {
           <div className="p-2">
             <ImageHelper product={product}/>
           </div>
-          <p className="lead bg-success font-weight-normal text-wrap text-center">
-            {cartDescription}
-          </p>
             <p className="btn btn-success rounded  btn-sm px-4">Tk{ cartPrice }</p>
           <div className="row">
             <div className="col-12">
