@@ -1,12 +1,12 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { addItemCart } from './Helper/CartHelper';
+import { addItemCart, removeItemFromCart } from './Helper/CartHelper';
 import ImageHelper from './Helper/ImageHelper';
 
 
 const isAuthenTicated = true
 
-const Card = ({product, addTocart=true, removeFromCart=false}) => {
+const Card = ({product, addTocart=true, removeFromCart=true}) => {
     const cartTitle = product ? product.name : "Anonymous";
     const cartDescription = product ? product.description : "defaoult description"
     const cartPrice = product ? product.price : "0.0"
@@ -43,6 +43,7 @@ const Card = ({product, addTocart=true, removeFromCart=false}) => {
             removeFromCart && (
                 <button
                 onClick={() => {
+                    removeItemFromCart(product.id)
                     console.log("product remove from cart");
                 }}
                 className="btn btn-block btn-outline-danger mt-2 mb-2"
