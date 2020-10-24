@@ -16,17 +16,17 @@ const SignUp = () => {
                 <div className="container">
                 <div className="form m-4">
                     <form >
-                        <div class="form-group">
+                        <div className="form-group">
                           <label htmlFor="name" className="text-light">Name</label>
-                          <input value={name} name="name" type="text" onChange={handleChange("name")} class="form-control" placeholder="Please Enter Your Name..."/>
+                          <input value={name} name="name" type="text" onChange={handleChange("name")} className="form-control" placeholder="Please Enter Your Name..."/>
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                           <label className="text-light">Email</label>
-                          <input value={email} type="email" onChange={handleChange("email")} class="form-control" placeholder="Please Enter Your Email..."/>
+                          <input value={email} type="email" onChange={handleChange("email")} className="form-control" placeholder="Please Enter Your Email..."/>
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                           <label className="text-light">Password</label>
-                          <input value={password} type="password" onChange={handleChange("password")} class="form-control" placeholder="Please Enter Your password..."/>
+                          <input value={password} type="password" onChange={handleChange("password")} className="form-control" placeholder="Please Enter Your password..."/>
                         </div>
                         <button className="btn btn-block btn-danger my-4" name="button">SignUp</button>
                     </form>
