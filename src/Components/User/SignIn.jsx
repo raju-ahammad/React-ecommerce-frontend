@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { authenticate, signin } from '../Auth/Helper'
+import { Link, Redirect } from 'react-router-dom'
+import { authenticate, isAuthenticated, signin } from '../Auth/Helper'
 import Base from '../Core/Base'
+
 
 
 const SignIn = () => {
@@ -37,6 +38,20 @@ const SignIn = () => {
             </div>
         )
     }
+
+    const performRedirect = () => {
+        if (isAuthenticated()) {
+            return <Redirect to="/"/>
+        }
+    }
+
+    const loadingMesasge = () => {
+        return loading && (
+            <div className="alert alert-info">
+                <h2>loading .....</h2>
+            </div>
+        )
+    }
     
     const onSubmit = (event) => {
         event.preventDefault();
@@ -50,7 +65,10 @@ const SignIn = () => {
                 let sessionToken = data.token;
                 authenticate(sessionToken, ()=>{
                     console.log("Token Added");
+                    setValues({...values, loading:true})
                 })
+            }else {
+                setValues({...values, loading:false})
             }
         })
         .catch(e=>console.log(e))
@@ -80,9 +98,10 @@ const SignIn = () => {
 
     return (
         <Base title="this Sign in Page" description="T shirt Store">
+            {loadingMesasge()}
             {signInForm()}
             <p className="text-center"> {JSON.stringify(values)}  </p>
-            <h1>Welcome to sign in page</h1>
+            {performRedirect()}
         </Base>
     )
 }
