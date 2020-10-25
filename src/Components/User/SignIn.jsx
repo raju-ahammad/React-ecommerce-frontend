@@ -100,7 +100,7 @@ const SignIn = () => {
         <Base title="this Sign in Page" description="T shirt Store">
             {loadingMesasge()}
             {signInForm()}
-            <p className="text-center"> {JSON.stringify(values)}  </p>
+            <h2 className="text-center">If you are not registerd user please <Link className="text-decoration-none" to="signup">SignUp</Link> </h2>
             {performRedirect()}
         </Base>
     )
