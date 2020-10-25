@@ -1,7 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
-const Menu = () => {
+const currentTab = (history, path) => {
+    if (history.location.pathname === path) {
+        return {color: "#3AA64D"}
+    }else {
+        return {color: "ffffff"}
+    }
+}
+
+const Menu = ({history, path}) => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark shadow" style={{ background:"#32383E"}}>
             <div className="container-fluid ml-4">
@@ -12,10 +20,13 @@ const Menu = () => {
                 <div className="collapse navbar-collapse" id="navbarText">
                 <ul className="navbar-nav mr-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                    <Link className="nav-link" aria-current="page" to="/">Home</Link>
+                    <Link className="nav-link" style={ currentTab(history, "/") } aria-current="page" to="/">Home</Link>
                     </li>
                     <li className="nav-item">
-                    <Link className="nav-link " aria-current="page" to="cart">Cart</Link>
+                    <Link className="nav-link " style={ currentTab(history, "cart") } aria-current="page" to="cart">Cart</Link>
+                    </li>
+                    <li className="nav-item">
+                    <Link className="nav-link " style={ currentTab(history, "/signin") } aria-current="page" to="signin">SignIn</Link>
                     </li>
                 </ul>
                 
@@ -30,4 +41,4 @@ const Menu = () => {
     )
 }
 
-export default Menu
+export default withRouter(Menu)

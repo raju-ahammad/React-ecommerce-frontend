@@ -7,6 +7,9 @@ import { getProducts } from './Helper/CoreApiCall';
 const Home = () => {
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(false);
+    
+
+
 
     const loadProducts = () => {
         getProducts()
@@ -21,13 +24,14 @@ const Home = () => {
 
     useEffect (()=>{
         loadProducts();
-    })
+    }, [])
     
 
     return (
         <Base title="Home Page" description="welcome to To my store">
             <h1 className="text-center m-4 text-info">Hello from Home Component <Link to="signup">Sign Up</Link> </h1>
             <div className="row">
+              
                 {products.map((product, index)=>{
                     return (
                         <div key={index} className="col-3 mb-4">
@@ -36,6 +40,7 @@ const Home = () => {
                     )
                 })}
             </div>
+            {error}
         </Base>
     )
 }
