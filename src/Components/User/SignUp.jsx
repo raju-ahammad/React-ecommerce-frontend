@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { signUp } from '../Auth/Helper'
 import Base from '../Core/Base'
 
 const SignUp = () => {
@@ -9,13 +10,34 @@ const SignUp = () => {
     const handleChange = (name) => (event) => {
         setValues({...values, error:false, [name]: event.target.value})
     } 
+    
+    const onSubmit = (event) => {
+        event.preventDefault();
+        setValues({
+            ...values, error:false
+        })
+        signUp({name, email, password})
+        .then((data)=> {
+            console.log("DAta", data);
+            if (data.email === email) {
+                setValues({
+                    ...values, name:"", email:"", password:"", error:"", success: true,
+                })
+            }else {
+                setValues({
+                    ...values, error: true, success: false
+                })
+            }
+        })
+        .catch(e=>console.log(e))
+    }
 
     const signUpForm = () => {
         return (
             <div className="card mb-4" style={{margin: "auto", width: "50%", background:"#32383E"}}>
                 <div className="container">
                 <div className="form m-4">
-                    <form >
+                    <form>
                         <div className="form-group">
                           <label htmlFor="name" className="text-light">Name</label>
                           <input value={name} name="name" type="text" onChange={handleChange("name")} className="form-control" placeholder="Please Enter Your Name..."/>
@@ -28,16 +50,19 @@ const SignUp = () => {
                           <label className="text-light">Password</label>
                           <input value={password} type="password" onChange={handleChange("password")} className="form-control" placeholder="Please Enter Your password..."/>
                         </div>
-                        <button className="btn btn-block btn-danger my-4" name="button">SignUp</button>
+                        <button onClick={onSubmit} className="btn btn-block btn-danger my-4">SignUp</button>
                     </form>
                 </div>
                 </div>
             </div>
         )
     }
+
+
     return (
         <Base title="Sign Up Here" description="This is Sign up Page">
             {signUpForm()}
+            {JSON.stringify(values)}
         </Base>
     )
 }
