@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { signUp } from '../Auth/Helper'
 import Base from '../Core/Base'
 
@@ -10,6 +11,29 @@ const SignUp = () => {
     const handleChange = (name) => (event) => {
         setValues({...values, error:false, [name]: event.target.value})
     } 
+
+    const successMessage = () => {
+        return (
+            <div className="row">
+                <div className="col-md-6 offset-sm-3 text-left">
+                    <div className="alert alert-success " style={{ display: success ? "": "none" }}>
+                        You are signup success plaese <Link to="/signin">login now!</Link>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+    const errorMessage = () => {
+        return (
+            <div className="row">
+                <div className="col-md-6 offset-sm-3 text-left">
+                    <div className="alert alert-danger " style={{ display: error ? "": "none" }}>
+                        check all fields and again submit
+                    </div>
+                </div>
+            </div>
+        )
+    }
     
     const onSubmit = (event) => {
         event.preventDefault();
@@ -61,6 +85,8 @@ const SignUp = () => {
 
     return (
         <Base title="Sign Up Here" description="This is Sign up Page">
+            {successMessage()}
+            {errorMessage()}
             {signUpForm()}
             {JSON.stringify(values)}
         </Base>
