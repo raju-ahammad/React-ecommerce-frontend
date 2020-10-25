@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { signOut } from '../Auth/Helper'
+import { isAuthenticated, signOut } from '../Auth/Helper'
 
 const currentTab = (history, path) => {
     if (history.location.pathname === path) {
@@ -26,22 +26,30 @@ const Menu = ({history, path}) => {
                     <li className="nav-item">
                     <Link className="nav-link " style={ currentTab(history, "cart") } aria-current="page" to="cart">Cart</Link>
                     </li>
-                    <li className="nav-item">
-                    <Link className="nav-link " style={ currentTab(history, "/dashboard") } aria-current="page" to="dashboard">Dashboard</Link>
-                    </li>
-                    <li className="nav-item">
+                    {isAuthenticated() && (
+                        <li className="nav-item">
+                        <Link className="nav-link " style={ currentTab(history, "/dashboard") } aria-current="page" to="dashboard">Dashboard</Link>
+                        </li>
+                    )}
+                    {!isAuthenticated() && (
+                        <>
+                        <li className="nav-item">
                     <Link className="nav-link " style={ currentTab(history, "/signin") } aria-current="page" to="signin">SignIn</Link>
                     </li>
                     <li className="nav-item">
                     <Link className="nav-link " style={ currentTab(history, "/signup") } aria-current="page" to="signup">SignUp</Link>
                     </li>
-                    <li className="nav-item">
+                        </>
+                    )}
+                    {isAuthenticated() && (
+                        <li className="nav-item">
                         <span className="nav-link text-warning" style={{cursor:"pointer"}} onClick={()=> {
                             signOut(() => {
                                 history.push("/")
                             })
                         }}>Signout</span>
                     </li>
+                    )}
                 </ul>
                 
                 <span className="navbar-text mr-4 text-secondary">

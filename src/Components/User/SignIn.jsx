@@ -62,8 +62,8 @@ const SignIn = () => {
         .then((data)=> {
             console.log("DAta", data);
             if (data.token) {
-                let sessionToken = data.token;
-                authenticate(sessionToken, ()=>{
+                // let sessionToken = data.token;
+                authenticate(data, ()=>{
                     console.log("Token Added");
                     setValues({...values, loading:true})
                 })
