@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { signin } from '../Auth/Helper'
+import { authenticate, signin } from '../Auth/Helper'
 import Base from '../Core/Base'
 
+
 const SignIn = () => {
-    const [values, setValues] = useState({name:"", email:"", password:"", error:"", success: false, loading: false, isRedirect: false})
+    const [values, setValues] = useState({name:"", email:"five@gmail.com", password:"1234", error:"", success: false, loading: false, isRedirect: false})
 
     const {name, email, password, error, success, loading, isRedirect} = values
+
+
     const handleChange = (name) => (event) => {
         setValues({...values, error:false, [name]: event.target.value})
     } 
+
 
     const successMessage = () => {
         return (
@@ -37,18 +41,15 @@ const SignIn = () => {
     const onSubmit = (event) => {
         event.preventDefault();
         setValues({
-            ...values, error:false
+            ...values, error:false, loading:true
         })
-        signin({name, email, password})
+        signin({email, password})
         .then((data)=> {
             console.log("DAta", data);
-            if (data.email === email) {
-                setValues({
-                    ...values, name:"", email:"", password:"", error:"", success: true,
-                })
-            }else {
-                setValues({
-                    ...values, error: true, success: false
+            if (data.token) {
+                let sessionToken = data.token;
+                authenticate(sessionToken, ()=>{
+                    console.log("Token Added");
                 })
             }
         })
@@ -69,7 +70,7 @@ const SignIn = () => {
                           <label className="text-light">Password</label>
                           <input value={password} type="password" onChange={handleChange("password")} className="form-control" placeholder="Please Enter Your password..."/>
                         </div>
-                        <button onClick={()=>{}} className="btn btn-block btn-danger my-4">Login</button>
+                        <button onClick={onSubmit} className="btn btn-block btn-danger my-4">Login</button>
                     </form>
                 </div>
                 </div>

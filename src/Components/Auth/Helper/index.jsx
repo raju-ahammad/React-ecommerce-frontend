@@ -22,6 +22,10 @@ export const signin = (user) => {
     for (const name in user) {
         formData.append(name, user[name]);
     }
+
+    for (var key of formData.keys()){
+        console.log("Mykey:",key);
+    }
     return fetch(`${API}user/login/`, {
         method: "POST",
         
