@@ -5,7 +5,7 @@ import { addItemCart, removeItemFromCart } from './Helper/CartHelper';
 import ImageHelper from './Helper/ImageHelper';
 
 
-const Card = ({product, addTocart=true, removeFromCart=true}) => {
+const Card = ({product, addtocart=true, removeFromCart=false, reload=undefined, setReload=(f) =>f, }) => {
 
     const [redirect, setRedirect] = useState(false)
     const cartTitle = product ? product.name : "Anonymous";
@@ -25,11 +25,10 @@ const Card = ({product, addTocart=true, removeFromCart=true}) => {
         if(redirect) {
             return <Redirect to="/cart" />
         }
-    }
-
-    const showAddToCart = addTocart => {
+    } 
+    const showAddToCart = (addToCart) => {
         return (
-            addTocart && (
+          addtocart && (
                 <button
                 onClick={addToCart}
                 className="btn btn-block btn-outline-success mt-2 mb-2"
@@ -41,10 +40,11 @@ const Card = ({product, addTocart=true, removeFromCart=true}) => {
     }
     const showRemoveFromCart = (removeFromCart) => {
         return (
-            removeFromCart && (
+          removeFromCart && (
                 <button
                 onClick={() => {
                     removeItemFromCart(product.id)
+                    setReload(!reload)
                     console.log("product remove from cart");
                 }}
                 className="btn btn-block btn-outline-danger mt-2 mb-2"
