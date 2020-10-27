@@ -1,6 +1,6 @@
 const { API } = require("../../../Api");
 
-const getMeToken = (userId, token) => {
+export const getMeToken = (userId, token) => {
     return fetch(`${API}payment/gettoken/${userId}/${token}/`, {
         method: "GET",
 
