@@ -28,7 +28,7 @@ const Menu = ({history, path}) => {
                     </li>
                     {isAuthenticated() && (
                         <li className="nav-item">
-                        <Link className="nav-link " style={ currentTab(history, "/dashboard") } aria-current="page" to="dashboard">Dashboard</Link>
+                        <Link className="nav-link " style={ currentTab(history, "dashboard") } aria-current="page" to="dashboard">Dashboard</Link>
                         </li>
                     )}
                     {!isAuthenticated() && (
