@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Base from './Base';
 import Card from './Card';
 import { getProducts } from './Helper/CoreApiCall';
@@ -28,8 +27,7 @@ const Home = () => {
     
 
     return (
-        <Base title="Home Page" description="welcome to To my store">
-            <h1 className="text-center m-4 text-info">Hello from Home Component <Link to="signup">Sign Up</Link> </h1>
+        <Base title="Our Store" description="welcome to To my store">
             <div className="row">
               
                 {products.map((product, index)=>{
